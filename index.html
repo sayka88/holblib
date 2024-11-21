@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Library</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">Books Library</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Books</a></li>
+                <li><a href="index.html">My Library</a></li>
+            </ul>
+            <div class="auth-links">
+                <a href="login.html">Login</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search for books...">
+            <button onclick="searchBooks()">Search</button>
+        </div>
+        <div class="books-container" id="booksContainer">
+            <!-- Book items will be dynamically added here -->
+        </div>
+    </main>
+    <script src="js/script.js"></script>
+</body>
+</html>

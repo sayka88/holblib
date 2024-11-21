@@ -1,0 +1,191 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.auth-links a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.search-bar {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.books-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.book-row {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 20px;
+}
+
+.book-item {
+    display: flex;
+    
+    width: 30%;
+    text-align: left;
+    margin: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-item img {
+    width: 120px; /* Уменьшенный размер обложки */
+    height: 190px;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.book-item .book-info {
+    
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.book-item h3 {
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.book-item p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.book-item button {
+    margin-top: 100px;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.book-item .book-details {
+    
+
+}
+
+.book-item .book-details h3, .book-item .book-details p {
+    margin: ;
+    justify-content: space-between;
+}
+
+.login-container, .register-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.login-container form, .register-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-container label, .register-container label {
+    text-align: left;
+    width: 100%;
+}
+
+.login-container input, .register-container input {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.login-container button, .register-container button {
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.register-link, .login-link {
+    margin-top: 10px;
+}
+
+.register-link a, .login-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
