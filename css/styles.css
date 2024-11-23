@@ -90,7 +90,6 @@ nav {
 
 .book-item {
     display: flex;
-    
     width: 30%;
     text-align: left;
     margin: 10px;
@@ -108,7 +107,6 @@ nav {
 }
 
 .book-item .book-info {
-    
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 1;
@@ -136,7 +134,6 @@ nav {
 }
 
 .book-item .book-details {
-    
 
 }
 
@@ -188,4 +185,221 @@ nav {
     color: #007bff;
     text-decoration: none;
     font-weight: bold;
+}
+
+/* Добавьте это в конец вашего файла styles.css */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #0056b3;
+}
+
+/* Добавьте это в конец вашего файла styles.css */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.rating span {
+    font-size: 24px;
+    color: gold;
+    cursor: pointer;
+}
+
+.rating span:hover,
+.rating span:hover ~ span {
+    color: gold;
+}
+
+.modal-content button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+
+.review {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.review h4 {
+    margin: 0 0 5px 0;
+}
+
+.review p {
+    margin: 0;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.book-details h3 {
+    cursor: pointer;
+}
+
+.book-details h3:hover {
+    text-decoration: underline;
+}
+
+/* Стили для страницы review.html */
+.review-container {
+    margin: 20px;
+    text-align: center;
+}
+
+.review-container h2 {
+    margin-bottom: 20px;
+}
+
+.review-container .book-details {
+    margin-bottom: 20px;
+}
+
+.review-container .book-details img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.review-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.review-container form label {
+    margin-bottom: 10px;
+}
+
+.review-container form select,
+.review-container form textarea {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.review-container form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.review-container form button:hover {
+    background-color: #0056b3;
+}
+
+.review-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.review-item p {
+    margin: 5px 0;
 }

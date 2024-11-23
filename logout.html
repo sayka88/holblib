@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - Books Library</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">Books Library</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Books</a></li>
+                <li><a href="my_library.html">My Library</a></li>
+                <li><a href="my_favorites.html">My Favorites</a></li>
+            </ul>
+            <div class="auth-links">
+                <a href="login.html">Login</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="logout-container">
+            <h2>You have been logged out.</h2>
+            <p>Thank you for using Books Library. <a href="login.html">Login again</a>.</p>
+        </div>
+    </main>
+    <script src="js/script.js"></script>
+    <script>
+        // Удаление текущего пользователя из localStorage при загрузке страницы
+        localStorage.removeItem('currentUser');
+        // Обновление навигационной панели
+        const authLinks = document.querySelector('.auth-links');
+        if (authLinks) {
+            authLinks.innerHTML = `<a href="login.html">Login</a>`;
+        }
+    </script>
+</body>
+</html>

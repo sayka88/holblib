@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Review - Books Library</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">Books Library</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Books</a></li>
+                <li><a href="my_library.html">My Library</a></li>
+                <li><a href="my_favorites.html">My Favorites</a></li>
+            </ul>
+            <div class="auth-links" id="authLinks">
+                <a href="login.html">Login</a>
+                <div class="dropdown" id="userDropdown" style="display: none;">
+                    <button class="dropbtn">User</button>
+                    <div class="dropdown-content">
+                        <a href="my_library.html">My Library</a>
+                        <a href="my_favorites.html">My Favorites</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="review-container">
+            <h2>Add Review for <span id="bookTitle"></span></h2>
+            <div class="book-details">
+                <img id="bookImg" alt="Book Cover">
+                <p id="bookAuthor"></p>
+                <p id="bookDescription"></p>
+            </div>
+            <form id="reviewForm">
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <label for="review">Review:</label>
+                <textarea id="review" name="review" rows="4" required></textarea>
+                <button type="submit">Submit Review</button>
+            </form>
+            <div id="reviewsContainer"></div>
+        </div>
+    </main>
+    <script src="js/bookScript.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookTitleElement = document.getElementById('bookTitle');
+            const bookAuthorElement = document.getElementById('bookAuthor');
+            const bookImgElement = document.getElementById('bookImg');
+            const bookDescriptionElement = document.getElementById('bookDescription');
+            const reviewsContainer = document.getElementById('reviewsContainer');
+            const reviewForm = document.getElementById('reviewForm');
+
+            const currentBookId = localStorage.getItem('currentBookId');
+            const currentBook = localStorage.getItem('currentBook');
+            const currentAuthor = localStorage.getItem('currentAuthor');
+            const currentImg = localStorage.getItem('currentImg');
+            const currentDescription = localStorage.getItem('currentDescription');
+
+            if (currentBook) {
+                bookTitleElement.textContent = currentBook;
+                bookAuthorElement.textContent = `Author: ${currentAuthor}`;
+                bookImgElement.src = currentImg;
+                bookDescriptionElement.textContent = currentDescription;
+
+                // Извлечение отзывов из localStorage
+                const reviews = JSON.parse(localStorage.getItem(`reviews_${currentBookId}`)) || [];
+                reviews.forEach(review => {
+                    const reviewElement = document.createElement('div');
+                    reviewElement.classList.add('review-item');
+                    reviewElement.innerHTML = `
+                        <p><strong>Rating:</strong> ${review.rating}</p>
+                        <p><strong>Review:</strong> ${review.review}</p>
+                    `;
+                    reviewsContainer.appendChild(reviewElement);
+                });
+
+                // Обработка отправки формы отзыва
+                reviewForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const rating = document.getElementById('rating').value;
+                    const reviewText = document.getElementById('review').value;
+
+                    const newReview = { rating, review: reviewText };
+                    reviews.push(newReview);
+                    localStorage.setItem(`reviews_${currentBookId}`, JSON.stringify(reviews));
+
+                    // Отображение нового отзыва
+                    const reviewElement = document.createElement('div');
+                    reviewElement.classList.add('review-item');
+                    reviewElement.innerHTML = `
+                        <p><strong>Rating:</strong> ${newReview.rating}</p>
+                        <p><strong>Review:</strong> ${newReview.review}</p>
+                    `;
+                    reviewsContainer.appendChild(reviewElement);
+
+                    // Очистка формы
+                    reviewForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -41,25 +41,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
 
-
-
-bookScript.js
-
-const books = [
-    { id: 1, title: 'Software Developers', author: 'John Sonmez', img: 'images/softw.jpg', description: 'A comprehensive guide to becoming a software developer.', rating: 4 },
-    { id: 2, title: 'The Martian Chronicles', author: 'Ray Bradbury', img: 'images/hack.jpg', description: 'A collection of short stories about the colonization of Mars.', rating: 5 },
-    { id: 3, title: 'Volatiles in the Martian Crust', author: 'Justin Filiberto, Susanne P. Schwenzer', img: 'images/python.jpg', description: 'A scientific exploration of the volatiles found in the Martian crust.', rating: 3 },
-    { id: 4, title: 'Software Developers', author: 'John Sonmez', img: 'images/softw.jpg', description: 'A comprehensive guide to becoming a software developer.', rating: 4 },
-    { id: 5, title: 'Artemis: A Novel', author: 'Andy Weir', img: 'images/hack.jpg', description: 'A thrilling novel about a heist on the moon.', rating: 5 },
-    { id: 6, title: 'The Big Book', author: 'Marc Hartzman', img: 'images/python.jpg', description: 'A comprehensive history of Mars exploration.', rating: 4 }
-];
-
-document.addEventListener('DOMContentLoaded', function() {
     const booksContainer = document.getElementById('booksContainer');
 
     if (booksContainer) {
+        const books = [
+            { title: 'Software Developers', author: 'John Sonmez', img: 'images/softw.jpg', description: 'A comprehensive guide to becoming a software developer.', rating: 4 },
+            { title: 'The Martian Chronicles', author: 'Ray Bradbury', img: 'images/hack.jpg', description: 'A collection of short stories about the colonization of Mars.', rating: 5 },
+            { title: 'Volatiles in the Martian Crust', author: 'Justin Filiberto, Susanne P. Schwenzer', img: 'images/python.jpg', description: 'A scientific exploration of the volatiles found in the Martian crust.', rating: 3 },
+            { title: 'Software Developers', author: 'John Sonmez', img: 'images/softw.jpg', description: 'A comprehensive guide to becoming a software developer.', rating: 4 },
+            { title: 'Artemis: A Novel', author: 'Andy Weir', img: 'images/hack.jpg', description: 'A thrilling novel about a heist on the moon.', rating: 5 },
+            { title: 'The Big Book', author: 'Marc Hartzman', img: 'images/python.jpg', description: 'A comprehensive history of Mars exploration.', rating: 4 }
+        ];
+
         let bookRow = document.createElement('div');
         bookRow.classList.add('book-row');
 
@@ -69,9 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
             bookItem.innerHTML = `
                 <img src="${book.img}" alt="${book.title}">
                 <div class="book-details">
-                    <h3 onclick="openModal('${book.id}', '${book.title}', '${book.author}', '${book.img}', '${book.description}')">${book.title}</h3>
+                    <h3 onclick="openModal('${book.title}', '${book.author}', '${book.img}', '${book.description}')">${book.title}</h3>
                     <p>${book.author}</p>
-                    <button onclick="addToShelf('${book.id}')">Add to shelf</button>
+                    <button onclick="addToShelf('${book.title}', '${book.author}', '${book.img}')">Add to shelf</button>
                 </div>
             `;
             bookRow.appendChild(bookItem);
@@ -89,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentUser = localStorage.getItem('currentUser');
         if (currentUser) {
             const userLibrary = JSON.parse(localStorage.getItem(`library_${currentUser}`)) || [];
-            console.log('User Library:', userLibrary); // Отладочная информация
             userLibrary.forEach(book => {
                 const bookItem = document.createElement('div');
                 bookItem.classList.add('book-item');
@@ -98,8 +91,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="book-details">
                         <h3>${book.title}</h3>
                         <p>${book.author}</p>
-                        <button onclick="removeFromShelf('${book.id}')">Remove from shelf</button>
-                        <button onclick="addToFavorites('${book.id}')">Add to favorites</button>
+                        <button onclick="removeFromShelf('${book.title}', '${book.author}', '${book.img}')">Remove from shelf</button>
+                        <button onclick="addToFavorites('${book.title}', '${book.author}', '${book.img}')">Add to favorites</button>
                     </div>
                 `;
                 myLibraryContainer.appendChild(bookItem);
@@ -112,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentUser = localStorage.getItem('currentUser');
         if (currentUser) {
             const userFavorites = JSON.parse(localStorage.getItem(`favorites_${currentUser}`)) || [];
-            console.log('User Favorites:', userFavorites); // Отладочная информация
             userFavorites.forEach(book => {
                 const bookItem = document.createElement('div');
                 bookItem.classList.add('book-item');
@@ -121,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="book-details">
                         <h3>${book.title}</h3>
                         <p>${book.author}</p>
-                        <button onclick="removeFromFavorites('${book.id}')">Remove from favorites</button>
+                        <button onclick="removeFromFavorites('${book.title}', '${book.author}', '${book.img}')">Remove from favorites</button>
                     </div>
                 `;
                 myFavoritesContainer.appendChild(bookItem);
@@ -158,31 +150,24 @@ function updateAuthLinks(username) {
     }
 }
 
-function addToShelf(id) {
+function addToShelf(title, author, img) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
         const userLibrary = JSON.parse(localStorage.getItem(`library_${currentUser}`)) || [];
-        const book = books.find(b => b.id === id);
-        if (book && !userLibrary.some(b => b.id === id)) {
-            userLibrary.push(book);
-            localStorage.setItem(`library_${currentUser}`, JSON.stringify(userLibrary));
-            alert('Book added to your library!');
-            console.log('Updated Library:', userLibrary); // Отладочная информация
-        } else {
-            alert('Book is already in your library.');
-        }
+        userLibrary.push({ title, author, img });
+        localStorage.setItem(`library_${currentUser}`, JSON.stringify(userLibrary));
+        alert('Book added to your library!');
     } else {
         alert('Please login to add books to your library.');
     }
 }
 
-function removeFromShelf(id) {
+function removeFromShelf(title, author, img) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
         const userLibrary = JSON.parse(localStorage.getItem(`library_${currentUser}`)) || [];
-        const updatedLibrary = userLibrary.filter(book => book.id !== id);
+        const updatedLibrary = userLibrary.filter(book => !(book.title === title && book.author === author && book.img === img));
         localStorage.setItem(`library_${currentUser}`, JSON.stringify(updatedLibrary));
-        console.log('Updated Library:', updatedLibrary); // Отладочная информация
         alert('Book removed from your library!');
         location.reload();
     } else {
@@ -190,31 +175,24 @@ function removeFromShelf(id) {
     }
 }
 
-function addToFavorites(id) {
+function addToFavorites(title, author, img) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
         const userFavorites = JSON.parse(localStorage.getItem(`favorites_${currentUser}`)) || [];
-        const book = books.find(b => b.id === id);
-        if (book && !userFavorites.some(b => b.id === id)) {
-            userFavorites.push(book);
-            localStorage.setItem(`favorites_${currentUser}`, JSON.stringify(userFavorites));
-            alert('Book added to your favorites!');
-            console.log('Updated Favorites:', userFavorites); // Отладочная информация
-        } else {
-            alert('Book is already in your favorites.');
-        }
+        userFavorites.push({ title, author, img });
+        localStorage.setItem(`favorites_${currentUser}`, JSON.stringify(userFavorites));
+        alert('Book added to your favorites!');
     } else {
         alert('Please login to add books to your favorites.');
     }
 }
 
-function removeFromFavorites(id) {
+function removeFromFavorites(title, author, img) {
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
         const userFavorites = JSON.parse(localStorage.getItem(`favorites_${currentUser}`)) || [];
-        const updatedFavorites = userFavorites.filter(book => book.id !== id);
+        const updatedFavorites = userFavorites.filter(book => !(book.title === title && book.author === author && book.img === img));
         localStorage.setItem(`favorites_${currentUser}`, JSON.stringify(updatedFavorites));
-        console.log('Updated Favorites:', updatedFavorites); // Отладочная информация
         alert('Book removed from your favorites!');
         location.reload();
     } else {
@@ -247,7 +225,7 @@ function searchBooks() {
     }
 }
 
-function openModal(id, title, author, img, description) {
+function openModal(title, author, img, description) {
     const modal = document.getElementById('bookModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalAuthor = document.getElementById('modalAuthor');
@@ -260,20 +238,6 @@ function openModal(id, title, author, img, description) {
     modalDescription.textContent = description;
 
     modal.style.display = 'block';
-
-    // Извлечение отзывов из localStorage
-    const reviews = JSON.parse(localStorage.getItem(`reviews_${id}`)) || [];
-    const modalReviews = document.getElementById('modalReviews');
-    modalReviews.innerHTML = '';
-    reviews.forEach(review => {
-        const reviewElement = document.createElement('div');
-        reviewElement.classList.add('review-item');
-        reviewElement.innerHTML = `
-            <p><strong>Rating:</strong> ${review.rating}</p>
-            <p><strong>Review:</strong> ${review.review}</p>
-        `;
-        modalReviews.appendChild(reviewElement);
-    });
 }
 
 function closeModal() {
@@ -281,12 +245,7 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-function goToReviewPage(id, title, author, img, description) {
-    localStorage.setItem('currentBookId', id);
-    localStorage.setItem('currentBook', title);
-    localStorage.setItem('currentAuthor', author);
-    localStorage.setItem('currentImg', img);
-    localStorage.setItem('currentDescription', description);
+function goToReviewPage() {
     window.location.href = 'review.html';
 }
 

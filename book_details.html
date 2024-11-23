@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books Library</title>
+    <title>Book Details - Books Library</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -31,29 +31,30 @@
         </nav>
     </header>
     <main>
-        <div class="search-bar">
-            <input type="text" id="search" placeholder="Search for books...">
-            <button onclick="searchBooks()">Search</button>
+        <div class="book-details-container" id="bookDetailsContainer">
+            <!-- Book details will be dynamically added here -->
         </div>
-        <div class="books-container" id="booksContainer">
-            <!-- Book items will be dynamically added here -->
+        <div class="reviews-container" id="reviewsContainer">
+            <!-- Reviews will be dynamically added here -->
         </div>
+        <div class="add-review-container" id="addReviewContainer" style="display: none;">
+            <h3>Add a Review</h3>
+            <form id="reviewForm">
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <label for="reviewText">Review:</label>
+                <textarea id="reviewText" name="reviewText" required></textarea>
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
+        <button onclick="toggleReviewForm()">Add a Review</button>
     </main>
-
-    <!-- Модальное окно -->
-    <div id="bookModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <p id="modalAuthor"></p>
-            <img id="modalImg" alt="Book Cover">
-            <p id="modalDescription"></p>
-            <div id="modalRating" class="rating"></div>
-            <div id="modalReviews"></div>
-            <button onclick="goToReviewPage(modalTitle.textContent, modalAuthor.textContent.replace('Author: ', ''), modalImg.src, modalDescription.textContent)">Add Review</button>
-        </div>
-    </div>
-
-    <script src="js/bookScript.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
