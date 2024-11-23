@@ -46,13 +46,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (booksContainer) {
         const books = [
-            { title: 'Software Developers', author: 'John Sonmez', img: 'images/softw.jpg', description: 'A comprehensive guide to becoming a software developer.', rating: 4 },
-            { title: 'The Martian Chronicles', author: 'Ray Bradbury', img: 'images/hack.jpg', description: 'A collection of short stories about the colonization of Mars.', rating: 5 },
-            { title: 'Volatiles in the Martian Crust', author: 'Justin Filiberto, Susanne P. Schwenzer', img: 'images/python.jpg', description: 'A scientific exploration of the volatiles found in the Martian crust.', rating: 3 },
-            { title: 'Software Developers', author: 'John Sonmez', img: 'images/softw.jpg', description: 'A comprehensive guide to becoming a software developer.', rating: 4 },
-            { title: 'Artemis: A Novel', author: 'Andy Weir', img: 'images/hack.jpg', description: 'A thrilling novel about a heist on the moon.', rating: 5 },
-            { title: 'The Big Book', author: 'Marc Hartzman', img: 'images/python.jpg', description: 'A comprehensive history of Mars exploration.', rating: 4 }
+            { id: 1, title: 'Software Developers', author: 'John Sonmez', img: 'images/softw.jpg', description: 'A comprehensive guide to becoming a software developer.', rating: 4 },
+            { id: 2, title: 'Generative AI For Dummies', author: 'Pam Baker', img: 'images/ai.jpg', description: 'You\'ll learn how to identify the best platforms for your needs.', rating: 5 },
+            { id: 3, title: 'Linux Basics for Hackers', author: 'OccupyTheWeb', img: 'images/linux.jpg', description: 'Topics include Linux command line basics, filesystems, networking, BASH.', rating: 3 }
         ];
+        
+        
+
+
+
 
         let bookRow = document.createElement('div');
         bookRow.classList.add('book-row');
